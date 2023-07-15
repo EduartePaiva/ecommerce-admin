@@ -6,15 +6,20 @@ import { useParams, useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import Heading from "@/components/ui/heading"
 import { Separator } from "@/components/ui/separator"
+import { BillboardColumn } from "./columns"
 
-export default function BillboardClient() {
+interface BillboardClientProps {
+    data: BillboardColumn[]
+}
+
+export default function BillboardClient({ data }: BillboardClientProps) {
     const router = useRouter()
     const params = useParams()
     return (
         <>
             <div className="flex items-center justify-between">
                 <Heading
-                    title="Billboards (0)"
+                    title={`Billboards (${data.length})`}
                     description="Manage billboards for your store"
                 />
                 <Button onClick={() => router.push(`/${params.storeId}/billboards/new`)}>
